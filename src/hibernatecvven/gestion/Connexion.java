@@ -5,7 +5,11 @@
  */
 package hibernatecvven.gestion;
 
-import hibernatecvven.gestion.Inscription;
+import hibernatecvven.config.HibernatUtil;
+import hibernatecvven.metier.Participant;
+import javax.swing.JOptionPane;
+import org.hibernate.Query;
+import org.hibernate.Session;
 
 /**
  *
@@ -167,9 +171,28 @@ public class Connexion extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        Session session =  HibernatUtil.getSession();
+        Query query= session.createQuery("FROM Participant WHERE login= :login AND password= :password") ;
+        query.setParameter("login", Login.getText());
+        query.setParameter("password", Password.getText());
+        java.util.List<Participant> results = query.list();
+       if(!results.isEmpty()){
+           for (Participant p : results) {
+            MainCVVEN fr = new MainCVVEN(p.getNum_pers(),Login.getText());
+            fr.setVisible(true);
+}
+           
+          
+        }
+        else{
+            JOptionPane.showMessageDialog(this,
+                results.size() ,
+                //Texte de la fenetre Message
+                "Messsage",//Titre de la fenetre Message
+                JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void QuitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitterActionPerformed

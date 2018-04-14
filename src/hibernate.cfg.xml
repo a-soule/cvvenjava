@@ -46,6 +46,7 @@ Contributor(s):
     <property name="hibernate.connection.url">jdbc:postgresql://chamilo.rene-descartes.fr:5432/groupe1ajava</property>
     <property name="hibernate.connection.username">groupe1a</property>
     <property name="hibernate.connection.password">mdp1a2017</property>
+    <mapping class="hibernatecvven.metier.Evenement"/>
     <mapping class="hibernatecvven.metier.Participant"/>
   </session-factory>
 </hibernate-configuration>

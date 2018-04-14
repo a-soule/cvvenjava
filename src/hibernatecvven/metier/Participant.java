@@ -6,6 +6,7 @@
 package hibernatecvven.metier;
 
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +21,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "participant")
 
-public class Participant {
+public class Participant implements Serializable{
 
     //Numéro de participant
     @Id

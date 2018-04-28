@@ -52,11 +52,11 @@ public class Evenement {
     @Column(name = "refSalle")
     private int refSalle;
 
+    
     public Evenement(){
     }
     
     public Evenement(String intitule, String date_debut, String theme, String duree, String nb_part_max, String description, String organisateur, String type_even, int refSalle) {
-        this.num_even = num_even;
         this.intitule = intitule;
         this.date_debut = date_debut;
         this.theme = theme;
@@ -107,6 +107,20 @@ public class Evenement {
     public int getRefSalle() {
         return refSalle;
     }
+    
+    public void setRefSalle(int refSalle) {
+        this.refSalle = refSalle;
+    }
+
+ 
+    
+    
+
+    @Override
+    public String toString() {
+        return this.intitule;
+    }
+    
     
     
 

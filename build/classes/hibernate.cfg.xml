@@ -47,6 +47,9 @@ Contributor(s):
     <property name="hibernate.connection.username">groupe1a</property>
     <property name="hibernate.connection.password">mdp1a2017</property>
     <mapping class="hibernatecvven.metier.Evenement"/>
+    <mapping class="hibernatecvven.metier.Inscription"/>
     <mapping class="hibernatecvven.metier.Participant"/>
+    <mapping class="hibernatecvven.metier.Utilisateurs"/>
+    <mapping class="hibernatecvven.metier.Salle"/>
   </session-factory>
 </hibernate-configuration>

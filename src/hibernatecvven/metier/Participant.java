@@ -7,6 +7,7 @@ package hibernatecvven.metier;
 
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,40 +38,31 @@ public class Participant implements Serializable{
     @Column(name = "prenom")
     private String prenom;
 
-    // Organisation dont fait partie le participant
+
     @Column(name = "organisation")
     private String organisation;
     
-    // Organisation dont fait partie le participant
+
     @Column(name = "email")
     private String email;
     
     @Column(name = "date_naiss")
-    private String date;
+    private Date date;
     
-    // Organisation dont fait partie le participant
     @Column(name = "observations")
     private String observations;
     
-    // Organisation dont fait partie le participant
-    @Column(name = "password")
-    private String password;
-
-    @Column(name = "login")
-    private String login;
 
     public Participant() {
     }
 
-    public Participant(String nom, String prenom, String organisation, String email,String date, String observations, String login,String password) {
+    public Participant(String nom, String prenom, String organisation, String email,Date date, String observations) {
         this.nom = nom;
         this.prenom = prenom;
         this.organisation = organisation;
         this.email = email;
-        
+        this.date = date;
         this.observations = observations;
-        this.password = password;
-        this.login = login;
     }
 
     
@@ -122,13 +114,9 @@ public class Participant implements Serializable{
     public void setObservations(String observations) {
         this.observations = observations;
     }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    
+    public String toString(){
+        return this.nom +" "+this.prenom;
     }
 
     

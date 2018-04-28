@@ -7,7 +7,7 @@ package hibernatecvven.gestion;
 
 import hibernatecvven.config.HibernatUtil;
 import hibernatecvven.metier.Evenement;
-import hibernatecvven.metier.Participant;
+import hibernatecvven.metier.Salle;
 import javax.swing.JOptionPane;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -25,6 +25,7 @@ public class InsererEvents extends javax.swing.JFrame {
     public InsererEvents() {
         initComponents();
         Session session =  HibernatUtil.getSession();
+        initComboBoxSalle();
     }
 
     /**
@@ -55,6 +56,9 @@ public class InsererEvents extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         Theme = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        ComboBoxSalles = new javax.swing.JComboBox<>();
+        Déconnexion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,14 +98,19 @@ public class InsererEvents extends javax.swing.JFrame {
 
         jLabel4.setText("Theme:");
 
+        jLabel10.setText("Salle:");
+
+        Déconnexion.setText("Quitter");
+        Déconnexion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DéconnexionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(185, 185, 185))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,13 +123,14 @@ public class InsererEvents extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel5))
+                                        .addComponent(jLabel3)
                                         .addGap(11, 11, 11))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(Organisateur)
                                     .addComponent(DateDebut, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
@@ -132,9 +142,9 @@ public class InsererEvents extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(NbPartMax, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel9)
+                                            .addComponent(jLabel4))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(TypeEvenement, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
@@ -142,17 +152,29 @@ public class InsererEvents extends javax.swing.JFrame {
                                         .addGap(0, 0, Short.MAX_VALUE)))))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 50, Short.MAX_VALUE)
+                        .addGap(0, 149, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addGap(124, 124, 124))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(193, 193, 193)
+                        .addComponent(jLabel7))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(41, 41, 41))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(191, 191, 191))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(124, 124, 124))))))
+                            .addComponent(jScrollPane1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(ComboBoxSalles, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(132, 132, 132)
+                .addComponent(jButton2)
+                .addGap(71, 71, 71)
+                .addComponent(Déconnexion, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,12 +202,18 @@ public class InsererEvents extends javax.swing.JFrame {
                     .addComponent(Organisateur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(Theme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(13, 13, 13)
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(ComboBoxSalles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(Déconnexion))
                 .addContainerGap())
         );
 
@@ -201,7 +229,7 @@ public class InsererEvents extends javax.swing.JFrame {
                 JOptionPane d = new JOptionPane();
 		// Création d'une transaction
 		Transaction transaction = session.beginTransaction();
-                Evenement ev = new Evenement(Intitule.getText(), DateDebut.getText(), Theme.getText(),Duree.getText(), NbPartMax.getText(),Description.getText(),Organisateur.getText(),TypeEvenement.getText(), 0);
+                Evenement ev = new Evenement(Intitule.getText(), DateDebut.getText(), Theme.getText(),Duree.getText(), NbPartMax.getText(),Description.getText(),Organisateur.getText(),TypeEvenement.getText(), LesSalles.get(ComboBoxSalles.getSelectedIndex()).getId_salle());
  
 		// Enregistrement de ces participants dans la base Postgresql
                try{
@@ -222,6 +250,13 @@ public class InsererEvents extends javax.swing.JFrame {
                }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void DéconnexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DéconnexionActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_DéconnexionActionPerformed
+
+    
+   
+    
     /**
      * @param args the command line arguments
      */
@@ -259,10 +294,28 @@ public class InsererEvents extends javax.swing.JFrame {
             }
         });
     }
+    
+     public void setSalleList(){
+        Session session =  HibernatUtil.getSession();
+        Query query= session.createQuery("FROM Salle");
+        this.LesSalles = query.list();
+    }
+    
+     
+    public void initComboBoxSalle(){
+        setSalleList();
+        for(Salle s : LesSalles){
+            ComboBoxSalles.addItem(s);
+        }
+    }
+    
+    private java.util.List<Salle> LesSalles;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<Salle> ComboBoxSalles;
     private javax.swing.JTextField DateDebut;
     private javax.swing.JTextArea Description;
     private javax.swing.JTextField Duree;
+    private javax.swing.JButton Déconnexion;
     private javax.swing.JTextField Intitule;
     private javax.swing.JTextField NbPartMax;
     private javax.swing.JTextField Organisateur;
@@ -270,6 +323,7 @@ public class InsererEvents extends javax.swing.JFrame {
     private javax.swing.JTextField TypeEvenement;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

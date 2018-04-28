@@ -7,21 +7,25 @@ package hibernatecvven.gestion;
 
 import hibernatecvven.config.HibernatUtil;
 import hibernatecvven.metier.Participant;
+import hibernatecvven.metier.Utilisateurs;
 import javax.swing.JOptionPane;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
 /**
  *
- * @author a-soule
+ * @author a-soul
+ * Classe servant à la connexion au service
  */
 public class Connexion extends javax.swing.JFrame {
 
     /**
      * Creates new form Accueil
+     * Constructeur
      */
     public Connexion() {
         initComponents();
+        Session session =  HibernatUtil.getSession();
     }
 
     /**
@@ -39,10 +43,9 @@ public class Connexion extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         Login = new javax.swing.JTextField();
-        Password = new javax.swing.JTextField();
+        Password = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         Quitter = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,12 +70,6 @@ public class Connexion extends javax.swing.JFrame {
         jLabel2.setText("Login:");
 
         jLabel3.setText("Password:");
-
-        Password.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PasswordActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -102,7 +99,7 @@ public class Connexion extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         jButton1.setText("Se connecter");
@@ -116,13 +113,6 @@ public class Connexion extends javax.swing.JFrame {
         Quitter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 QuitterActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("S'inscrire");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
             }
         });
 
@@ -145,10 +135,6 @@ public class Connexion extends javax.swing.JFrame {
                         .addGap(39, 39, 39)
                         .addComponent(Quitter)))
                 .addContainerGap(101, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(184, 184, 184))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,23 +150,21 @@ public class Connexion extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
                     .addComponent(Quitter))
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+    //
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Session session =  HibernatUtil.getSession();
-        Query query= session.createQuery("FROM Participant WHERE login= :login AND password= :password") ;
+        Query query= session.createQuery("FROM Utilisateurs WHERE login= :login AND password= :password") ;
         query.setParameter("login", Login.getText());
         query.setParameter("password", Password.getText());
-        java.util.List<Participant> results = query.list();
+        java.util.List<Utilisateurs> results = query.list();
        if(!results.isEmpty()){
-           for (Participant p : results) {
-            MainCVVEN fr = new MainCVVEN(p.getNum_pers(),Login.getText());
+           for (Utilisateurs u : results) {
+            MainCVVEN fr = new MainCVVEN(Login.getText());
             fr.setVisible(true);
 }
            
@@ -194,19 +178,14 @@ public class Connexion extends javax.swing.JFrame {
                 JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+/**
+ * 
+ * @param evt 
+ * Quitter la page
+ */
     private void QuitterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitterActionPerformed
         this.dispose();
     }//GEN-LAST:event_QuitterActionPerformed
-
-    private void PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PasswordActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Inscription fr = new Inscription();
-        fr.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -246,10 +225,9 @@ public class Connexion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Login;
-    private javax.swing.JTextField Password;
+    private javax.swing.JPasswordField Password;
     private javax.swing.JButton Quitter;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -36,7 +36,7 @@ public class HibernatUtil {
  
 	/**
 	 * Ferme la session Hibernate
-	 * @throws HibernateException
+	 * @throws HibernateException Exception
 	 */
 	public static void closeSession() throws HibernateException {
 		sessionFactory.close();
